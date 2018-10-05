@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer-element.html"> 
+
+<dom-module id="first-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[greeting]]!</h2> <!--Solo lectura (one way data binding)-->
+    <h2>Hello</h2> <input type="text" value="{{greeting::input}}"> <!--Lectura y escritura (two way data binding)-->
+  </template>
+
+  <script>
+    /**
+     * `first-element`
+     * First element created by polymerando
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class FisrtElement extends Polymer.Element {
+      static get is() { return 'first-element'; }
+      static get properties() {
+        return {
+          greeting: {
+            type: String,
+            value: 'World'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(FisrtElement.is, FisrtElement);
+  </script>
+</dom-module>
