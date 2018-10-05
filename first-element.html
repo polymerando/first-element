@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html"> 
+<link rel="import" href="second-element.html"> 
 
 <dom-module id="first-element">
   <template>
@@ -9,6 +10,7 @@
     </style>
     <h2>Hello [[greeting]]!</h2> <!--Solo lectura (one way data binding)-->
     <h2>Hello</h2> <input type="text" value="{{greeting::input}}"> <!--Lectura y escritura (two way data binding)-->
+    <second-element greeting="Bienvenidos al video de customElements..."></second-element>
   </template>
 
   <script>
@@ -29,6 +31,26 @@
             value: 'World'
           }
         };
+      }
+      /**
+        * Called every time the element is inserted into the DOM. Useful for 
+        * running setup code, such as fetching resources or rendering.
+        * Generally, you should try to delay work until this time.
+        */
+      connectedCallback() {
+        super.connectedCallback();
+      
+        var second = document.createElement('second-element'); //Creamos el elemento 
+        second.style.display = "block";
+        console.log(second);
+        Polymer.dom(this).appendChild(second); //Agregamos el elemento al dom
+        setTimeout(() => {
+          Polymer.dom(this).removeChild(second); //Eliminamos el elemento del dom
+        }, 2000);
+        setTimeout(() => {
+          Polymer.dom(this).appendChild(second); //Agregamos nuevamente el elemento
+        }, 2000);
+      
       }
     }
 
